@@ -1,0 +1,16 @@
+# Rust
+quoter-rust/target
+**/*.rs.bk
+
+# Go
+fetcher-go/fetcher
+*.exe
+*.test
+
+# General
+.DS_Store
+.env
+*.log
+*.tmp
+.idea
+.vscode
