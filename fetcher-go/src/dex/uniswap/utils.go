@@ -8,6 +8,17 @@ import (
 	"sync"
 )
 
+var TICK_SPACINGS = map[int]int{
+	100:   1,
+	200:   4,
+	300:   6,
+	400:   8,
+	500:   10,
+	2500:  50,
+	3000:  60,
+	10000: 200,
+}
+
 func FetchPools(chainId int, dexName string, dexConfig *common.DexConfiguration) ([]any, error) {
 	url := dexConfig.GraphqlUrl
 	if url == "" {
@@ -50,7 +61,7 @@ func FetchPools(chainId int, dexName string, dexConfig *common.DexConfiguration)
 	results := make(chan result, pageCount)
 	var wg sync.WaitGroup
 
-	for i := 0; i < pageCount; i++ {
+	for i := range pageCount {
 		skip := i * 1000
 		wg.Add(1)
 
