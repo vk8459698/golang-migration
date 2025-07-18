@@ -1,5 +1,5 @@
-use warp::Filter;
 use serde::Serialize;
+use warp::Filter;
 
 #[derive(Serialize)]
 struct PingResponse {
@@ -11,15 +11,13 @@ struct PingResponse {
 async fn main() {
     let port = 8080;
 
-    let ping = warp::path!("ping")
-        .and(warp::get())
-        .map(|| {
-            let response = PingResponse {
-                status: "ok",
-                message: "pong",
-            };
-            warp::reply::json(&response)
-        });
+    let ping = warp::path!("ping").and(warp::get()).map(|| {
+        let response = PingResponse {
+            status: "ok",
+            message: "pong",
+        };
+        warp::reply::json(&response)
+    });
 
     println!("quoter rust started on port {}", port);
 
