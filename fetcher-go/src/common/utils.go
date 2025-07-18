@@ -3,8 +3,10 @@ package common
 import (
 	"context"
 	"fmt"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/redis/go-redis/v9"
 	"os"
+	"strings"
 )
 
 var Ctx = context.Background()
@@ -36,4 +38,15 @@ func getEnv(key, fallback string) string {
 
 func checkRedisConnection() error {
 	return RedisClient.Ping(Ctx).Err()
+}
+
+func SortTokens(tokenA, tokenB string) [2]string {
+	if strings.ToLower(tokenA) < strings.ToLower(tokenB) {
+		return [2]string{tokenA, tokenB}
+	}
+	return [2]string{tokenB, tokenA}
+}
+
+func Checksum(addr string) string {
+	return common.HexToAddress(addr).Hex()
 }
