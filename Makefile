@@ -9,7 +9,7 @@ stop:
 
 clean: stop
 	rm -rf quoter-rust/target
-	rm -rf fetcher-go/fetcher
+	rm -rf fetcher-go/target
 
 reinstall: clean build
 

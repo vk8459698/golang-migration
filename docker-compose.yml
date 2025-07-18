@@ -4,6 +4,14 @@ services:
     container_name: auro-liquid-redis
     ports:
       - "6379:6379"
+    networks:
+      - auro-liquid-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
 
   fetcher:
     build:
@@ -12,6 +20,8 @@ services:
     depends_on:
       - redis
     restart: always
+    networks:
+      - auro-liquid-network
 
   quoter:
     build:
@@ -22,3 +32,9 @@ services:
     depends_on:
       - redis
     restart: always
+    networks:
+      - auro-liquid-network
+
+networks:
+  auro-liquid-network:
+    name: auro-liquid-network

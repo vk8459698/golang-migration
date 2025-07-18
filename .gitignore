@@ -3,7 +3,7 @@ quoter-rust/target
 **/*.rs.bk
 
 # Go
-fetcher-go/fetcher
+fetcher-go/target
 *.exe
 *.test
 
