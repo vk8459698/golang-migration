@@ -18,633 +18,633 @@ type ProtocolParameters struct {
 }
 
 type DexConfiguration struct {
-	DexId               string
-	ChainId             int
-	ChainName           string
-	NativeSymbol        string
-	NativePrecision     int
-	RpcUrl              string
-	GraphqlUrl          string
-	BlockfrostProjectId string
-	ProtocolParameters  *ProtocolParameters
-	BaseTokens          map[string]TokenInfo
-	QuoteTokens         map[string]TokenInfo
-	Pools               map[string]PoolInfo
+	dexId               string
+	chainId             int
+	chainName           string
+	nativeSymbol        string
+	nativePrecision     int
+	rpcUrl              string
+	graphqlUrl          string
+	blockfrostProjectId string
+	protocolParameters  *ProtocolParameters
+	baseTokens          map[string]TokenInfo
+	quoteTokens         map[string]TokenInfo
+	pools               map[string]PoolInfo
 }
 
-var UniswapConfigurations = map[int]*DexConfiguration{
+var uniswapConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "UNISWAP_V3",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "UNISWAP_V3",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("uniswap", "1")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("uniswap", "1")
 			return url
 		}(),
 	},
 	10: {
-		DexId:           "UNISWAP_V3",
-		ChainId:         10,
-		ChainName:       "Optimism",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "UNISWAP_V3",
+		chainId:         10,
+		chainName:       "Optimism",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("uniswap", "10")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("uniswap", "10")
 			return url
 		}(),
 	},
 	56: {
-		DexId:           "UNISWAP_V3",
-		ChainId:         56,
-		ChainName:       "BNB",
-		NativeSymbol:    "BNB",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "UNISWAP_V3",
+		chainId:         56,
+		chainName:       "BNB",
+		nativeSymbol:    "BNB",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("uniswap", "56")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("uniswap", "56")
 			return url
 		}(),
 	},
 	137: {
-		DexId:           "UNISWAP_V3",
-		ChainId:         137,
-		ChainName:       "Polygon",
-		NativeSymbol:    "POL",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "UNISWAP_V3",
+		chainId:         137,
+		chainName:       "Polygon",
+		nativeSymbol:    "POL",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("uniswap", "137")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("uniswap", "137")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "UNISWAP_V3",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "UNISWAP_V3",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("uniswap", "42161")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("uniswap", "42161")
 			return url
 		}(),
 	},
 }
 
-var PancakeswapConfigurations = map[int]*DexConfiguration{
+var pancakeswapConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "PANCAKESWAP_V3",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "PANCAKESWAP_V3",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("pancakeswap", "1")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("pancakeswap", "1")
 			return url
 		}(),
 	},
 	56: {
-		DexId:           "PANCAKESWAP_V3",
-		ChainId:         56,
-		ChainName:       "BNB",
-		NativeSymbol:    "BNB",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "PANCAKESWAP_V3",
+		chainId:         56,
+		chainName:       "BNB",
+		nativeSymbol:    "BNB",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("pancakeswap", "56")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("pancakeswap", "56")
 			return url
 		}(),
 	},
 	8453: {
-		DexId:           "PANCAKESWAP_V3",
-		ChainId:         8453,
-		ChainName:       "Base",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "PANCAKESWAP_V3",
+		chainId:         8453,
+		chainName:       "Base",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("pancakeswap", "8453")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("pancakeswap", "8453")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "PANCAKESWAP_V3",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "PANCAKESWAP_V3",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("pancakeswap", "42161")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("pancakeswap", "42161")
 			return url
 		}(),
 	},
 }
 
-var SushiswapConfigurations = map[int]*DexConfiguration{
+var sushiswapConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "SUSHISWAP_V3",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "SUSHISWAP_V3",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("sushiswap", "1")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("sushiswap", "1")
 			return url
 		}(),
 	},
 	10: {
-		DexId:           "SUSHISWAP_V3",
-		ChainId:         10,
-		ChainName:       "Optimism",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "SUSHISWAP_V3",
+		chainId:         10,
+		chainName:       "Optimism",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("sushiswap", "10")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("sushiswap", "10")
 			return url
 		}(),
 	},
 	56: {
-		DexId:           "SUSHISWAP_V3",
-		ChainId:         56,
-		ChainName:       "BNB",
-		NativeSymbol:    "BNB",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "SUSHISWAP_V3",
+		chainId:         56,
+		chainName:       "BNB",
+		nativeSymbol:    "BNB",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("sushiswap", "56")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("sushiswap", "56")
 			return url
 		}(),
 	},
 	137: {
-		DexId:           "SUSHISWAP_V3",
-		ChainId:         137,
-		ChainName:       "Polygon",
-		NativeSymbol:    "POL",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "SUSHISWAP_V3",
+		chainId:         137,
+		chainName:       "Polygon",
+		nativeSymbol:    "POL",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("sushiswap", "137")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("sushiswap", "137")
 			return url
 		}(),
 	},
 	8453: {
-		DexId:           "SUSHISWAP_V3",
-		ChainId:         8453,
-		ChainName:       "Base",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "SUSHISWAP_V3",
+		chainId:         8453,
+		chainName:       "Base",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("sushiswap", "8453")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("sushiswap", "8453")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "SUSHISWAP_V3",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "SUSHISWAP_V3",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("sushiswap", "42161")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("sushiswap", "42161")
 			return url
 		}(),
 	},
 }
 
-var CamelotConfigurations = map[int]*DexConfiguration{
+var camelotConfigurations = map[int]*DexConfiguration{
 	42161: {
-		DexId:           "CAMELOT_V3",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "CAMELOT_V3",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("camelot", "42161")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("camelot", "42161")
 			return url
 		}(),
 	},
 }
 
-var RaydiumConfigurations = map[int]*DexConfiguration{
+var raydiumConfigurations = map[int]*DexConfiguration{
 	101: {
-		DexId:           "RAYDIUM_V4",
-		ChainId:         101,
-		ChainName:       "Solana",
-		NativeSymbol:    "SOL",
-		NativePrecision: 9,
-		RpcUrl:          "https://api.mainnet-beta.solana.com",
+		dexId:           "RAYDIUM_V4",
+		chainId:         101,
+		chainName:       "Solana",
+		nativeSymbol:    "SOL",
+		nativePrecision: 9,
+		rpcUrl:          "https://api.mainnet-beta.solana.com",
 	},
 }
 
-var MeteoraConfigurations = map[int]*DexConfiguration{
+var meteoraConfigurations = map[int]*DexConfiguration{
 	101: {
-		DexId:           "METEORA",
-		ChainId:         101,
-		ChainName:       "Solana",
-		NativeSymbol:    "SOL",
-		NativePrecision: 9,
-		RpcUrl:          "https://api.mainnet-beta.solana.com",
+		dexId:           "METEORA",
+		chainId:         101,
+		chainName:       "Solana",
+		nativeSymbol:    "SOL",
+		nativePrecision: 9,
+		rpcUrl:          "https://api.mainnet-beta.solana.com",
 	},
 }
 
-var OrcaConfigurations = map[int]*DexConfiguration{
+var orcaConfigurations = map[int]*DexConfiguration{
 	101: {
-		DexId:           "ORCA_WHIRL",
-		ChainId:         101,
-		ChainName:       "Solana",
-		NativeSymbol:    "SOL",
-		NativePrecision: 9,
-		RpcUrl:          "https://api.mainnet-beta.solana.com",
+		dexId:           "ORCA_WHIRL",
+		chainId:         101,
+		chainName:       "Solana",
+		nativeSymbol:    "SOL",
+		nativePrecision: 9,
+		rpcUrl:          "https://api.mainnet-beta.solana.com",
 	},
 }
 
-var LifintyConfigurations = map[int]*DexConfiguration{
+var lifinityConfigurations = map[int]*DexConfiguration{
 	101: {
-		DexId:           "LIFINITY",
-		ChainId:         101,
-		ChainName:       "Solana",
-		NativeSymbol:    "SOL",
-		NativePrecision: 9,
-		RpcUrl:          "https://api.mainnet-beta.solana.com",
+		dexId:           "LIFINITY",
+		chainId:         101,
+		chainName:       "Solana",
+		nativeSymbol:    "SOL",
+		nativePrecision: 9,
+		rpcUrl:          "https://api.mainnet-beta.solana.com",
 	},
 }
 
-var MinswapConfigurations = map[int]*DexConfiguration{
+var minswapConfigurations = map[int]*DexConfiguration{
 	921: {
-		DexId:               "MINSWAP",
-		ChainId:             921,
-		ChainName:           "Cardano",
-		NativeSymbol:        "ADA",
-		NativePrecision:     6,
-		RpcUrl:              "https://cardano-mainnet.blockfrost.io/api/v0/",
-		BlockfrostProjectId: "mainnetAuG3MT1aYz6iVKfutPMss65Gu0eJV8hA",
-		ProtocolParameters: &ProtocolParameters{
+		dexId:               "MINSWAP",
+		chainId:             921,
+		chainName:           "Cardano",
+		nativeSymbol:        "ADA",
+		nativePrecision:     6,
+		rpcUrl:              "https://cardano-mainnet.blockfrost.io/api/v0/",
+		blockfrostProjectId: "mainnetAuG3MT1aYz6iVKfutPMss65Gu0eJV8hA",
+		protocolParameters: &ProtocolParameters{
 			MaxTxSize:  16384,
 			MaxValSize: 5000,
 		},
 	},
 }
 
-var DodoConfigurations = map[int]*DexConfiguration{
+var dodoConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "DODO_V2",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "DODO_V2",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("dodo", "1")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("dodo", "1")
 			return url
 		}(),
 	},
 	10: {
-		DexId:           "DODO_V2",
-		ChainId:         10,
-		ChainName:       "Optimism",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "DODO_V2",
+		chainId:         10,
+		chainName:       "Optimism",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("dodo", "10")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("dodo", "10")
 			return url
 		}(),
 	},
 	56: {
-		DexId:           "DODO_V2",
-		ChainId:         56,
-		ChainName:       "BNB",
-		NativeSymbol:    "BNB",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "DODO_V2",
+		chainId:         56,
+		chainName:       "BNB",
+		nativeSymbol:    "BNB",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("dodo", "56")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("dodo", "56")
 			return url
 		}(),
 	},
 	137: {
-		DexId:           "DODO_V2",
-		ChainId:         137,
-		ChainName:       "Polygon",
-		NativeSymbol:    "POL",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "DODO_V2",
+		chainId:         137,
+		chainName:       "Polygon",
+		nativeSymbol:    "POL",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("dodo", "137")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("dodo", "137")
 			return url
 		}(),
 	},
 	8453: {
-		DexId:           "DODO_V2",
-		ChainId:         8453,
-		ChainName:       "Base",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "DODO_V2",
+		chainId:         8453,
+		chainName:       "Base",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("dodo", "8453")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("dodo", "8453")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "DODO_V2",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "DODO_V2",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("dodo", "42161")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("dodo", "42161")
 			return url
 		}(),
 	},
 }
 
-var CurveConfigurations = map[int]*DexConfiguration{
+var curveConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "CURVE",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "CURVE",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("curve", "1")
 			return url
 		}(),
-		GraphqlUrl: func() string {
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("curve", "1")
 			return url
 		}(),
 	},
 }
 
-var MaverickConfigurations = map[int]*DexConfiguration{
+var maverickConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "MAVERICK_V2",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "MAVERICK_V2",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("maverick", "1")
 			return url
 		}(),
 	},
 	56: {
-		DexId:           "MAVERICK_V2",
-		ChainId:         56,
-		ChainName:       "BNB",
-		NativeSymbol:    "BNB",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "MAVERICK_V2",
+		chainId:         56,
+		chainName:       "BNB",
+		nativeSymbol:    "BNB",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("maverick", "56")
 			return url
 		}(),
 	},
 	8453: {
-		DexId:           "MAVERICK_V2",
-		ChainId:         8453,
-		ChainName:       "Base",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "MAVERICK_V2",
+		chainId:         8453,
+		chainName:       "Base",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("maverick", "8453")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "MAVERICK_V2",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		RpcUrl: func() string {
+		dexId:           "MAVERICK_V2",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		rpcUrl: func() string {
 			url, _ := getRpcUrl("maverick", "42161")
 			return url
 		}(),
 	},
 }
 
-var HyperionConfigurations = map[int]*DexConfiguration{
+var hyperionConfigurations = map[int]*DexConfiguration{
 	1400: {
-		DexId:           "HYPERION",
-		ChainId:         1400,
-		ChainName:       "Aptos",
-		NativeSymbol:    "APT",
-		NativePrecision: 8,
+		dexId:           "HYPERION",
+		chainId:         1400,
+		chainName:       "Aptos",
+		nativeSymbol:    "APT",
+		nativePrecision: 8,
 	},
 }
 
-var ThalaConfigurations = map[int]*DexConfiguration{
+var thalaConfigurations = map[int]*DexConfiguration{
 	1400: {
-		DexId:           "THALA_V2",
-		ChainId:         1400,
-		ChainName:       "Aptos",
-		NativeSymbol:    "APT",
-		NativePrecision: 8,
+		dexId:           "THALA_V2",
+		chainId:         1400,
+		chainName:       "Aptos",
+		nativeSymbol:    "APT",
+		nativePrecision: 8,
 	},
 }
 
-var CellanaConfigurations = map[int]*DexConfiguration{
+var cellanaConfigurations = map[int]*DexConfiguration{
 	1400: {
-		DexId:           "CELLANA",
-		ChainId:         1400,
-		ChainName:       "Aptos",
-		NativeSymbol:    "APT",
-		NativePrecision: 8,
+		dexId:           "CELLANA",
+		chainId:         1400,
+		chainName:       "Aptos",
+		nativeSymbol:    "APT",
+		nativePrecision: 8,
 	},
 }
 
-var TraderJoeConfigurations = map[int]*DexConfiguration{
+var traderJoeConfigurations = map[int]*DexConfiguration{
 	56: {
-		DexId:           "TRADERJOE",
-		ChainId:         56,
-		ChainName:       "BNB",
-		NativeSymbol:    "BNB",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "TRADERJOE",
+		chainId:         56,
+		chainName:       "BNB",
+		nativeSymbol:    "BNB",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("traderJoe", "56")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "TRADERJOE",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "TRADERJOE",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("traderJoe", "42161")
 			return url
 		}(),
 	},
 }
 
-var RamsesClConfiguration = map[int]*DexConfiguration{
+var ramsesClConfiguration = map[int]*DexConfiguration{
 	42161: {
-		DexId:           "RAMSES_CL",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "RAMSES_CL",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("ramsesCl", "42161")
 			return url
 		}(),
 	},
 }
 
-var RamsesLegacyConfiguration = map[int]*DexConfiguration{
+var ramsesLegacyConfiguration = map[int]*DexConfiguration{
 	42161: {
-		DexId:           "RAMSES_LEGACY",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "RAMSES_LEGACY",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("ramsesLegacy", "42161")
 			return url
 		}(),
 	},
 }
 
-var SwaprConfiguration = map[int]*DexConfiguration{
+var swaprConfiguration = map[int]*DexConfiguration{
 	1: {
-		DexId:           "SWAPR_V2",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "SWAPR_V2",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("swapr", "1")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "SWAPR_V2",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "SWAPR_V2",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("swapr", "42161")
 			return url
 		}(),
 	},
 }
 
-var WoofiConfigurations = map[int]*DexConfiguration{
+var woofiConfigurations = map[int]*DexConfiguration{
 	10: {
-		DexId:           "WOOFI_V2",
-		ChainId:         10,
-		ChainName:       "Optimism",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		BaseTokens:      map[string]TokenInfo{},
-		QuoteTokens:     map[string]TokenInfo{},
+		dexId:           "WOOFI_V2",
+		chainId:         10,
+		chainName:       "Optimism",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		baseTokens:      map[string]TokenInfo{},
+		quoteTokens:     map[string]TokenInfo{},
 	},
 	56: {
-		DexId:           "WOOFI_V2",
-		ChainId:         56,
-		ChainName:       "BNB",
-		NativeSymbol:    "BNB",
-		NativePrecision: 18,
-		BaseTokens:      map[string]TokenInfo{},
-		QuoteTokens:     map[string]TokenInfo{},
+		dexId:           "WOOFI_V2",
+		chainId:         56,
+		chainName:       "BNB",
+		nativeSymbol:    "BNB",
+		nativePrecision: 18,
+		baseTokens:      map[string]TokenInfo{},
+		quoteTokens:     map[string]TokenInfo{},
 	},
 	8453: {
-		DexId:           "WOOFI_V2",
-		ChainId:         8453,
-		ChainName:       "Base",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		BaseTokens:      map[string]TokenInfo{},
-		QuoteTokens:     map[string]TokenInfo{},
+		dexId:           "WOOFI_V2",
+		chainId:         8453,
+		chainName:       "Base",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		baseTokens:      map[string]TokenInfo{},
+		quoteTokens:     map[string]TokenInfo{},
 	},
 	42161: {
-		DexId:           "WOOFI_V2",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		BaseTokens: map[string]TokenInfo{
+		dexId:           "WOOFI_V2",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		baseTokens: map[string]TokenInfo{
 			"0x82aF49447D8a07e3bd95BD0d56f35241523fBab1": {
 				ID:       "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
 				Symbol:   "WETH",
@@ -671,7 +671,7 @@ var WoofiConfigurations = map[int]*DexConfiguration{
 				Decimals: 6,
 			},
 		},
-		QuoteTokens: map[string]TokenInfo{
+		quoteTokens: map[string]TokenInfo{
 			"0xaf88d065e77c8cC2239327C5EDb3A432268e5831": {
 				ID:       "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
 				Symbol:   "USDC",
@@ -681,38 +681,38 @@ var WoofiConfigurations = map[int]*DexConfiguration{
 	},
 }
 
-var FluidConfigurations = map[int]*DexConfiguration{
+var fluidConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "FLUID_V2",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		Pools:           map[string]PoolInfo{},
+		dexId:           "FLUID_V2",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		pools:           map[string]PoolInfo{},
 	},
 	137: {
-		DexId:           "FLUID_V2",
-		ChainId:         137,
-		ChainName:       "Polygon",
-		NativeSymbol:    "POL",
-		NativePrecision: 18,
-		Pools:           map[string]PoolInfo{},
+		dexId:           "FLUID_V2",
+		chainId:         137,
+		chainName:       "Polygon",
+		nativeSymbol:    "POL",
+		nativePrecision: 18,
+		pools:           map[string]PoolInfo{},
 	},
 	8453: {
-		DexId:           "FLUID_V2",
-		ChainId:         8453,
-		ChainName:       "Base",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		Pools:           map[string]PoolInfo{},
+		dexId:           "FLUID_V2",
+		chainId:         8453,
+		chainName:       "Base",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		pools:           map[string]PoolInfo{},
 	},
 	42161: {
-		DexId:           "FLUID_V2",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		Pools: map[string]PoolInfo{
+		dexId:           "FLUID_V2",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		pools: map[string]PoolInfo{
 			"0x0B1a513ee24972DAEf112bC777a5610d4325C9e7": {
 				Token0: TokenInfo{
 					ID:       "0x5979D7b546E38E414F7E9822514be443A4800529",
@@ -782,58 +782,58 @@ var FluidConfigurations = map[int]*DexConfiguration{
 	},
 }
 
-var BalancerConfigurations = map[int]*DexConfiguration{
+var balancerConfigurations = map[int]*DexConfiguration{
 	1: {
-		DexId:           "BALANCER",
-		ChainId:         1,
-		ChainName:       "Ethereum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "BALANCER",
+		chainId:         1,
+		chainName:       "Ethereum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("balancer", "1")
 			return url
 		}(),
 	},
 	10: {
-		DexId:           "BALANCER",
-		ChainId:         10,
-		ChainName:       "Optimism",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "BALANCER",
+		chainId:         10,
+		chainName:       "Optimism",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("balancer", "10")
 			return url
 		}(),
 	},
 	137: {
-		DexId:           "BALANCER",
-		ChainId:         137,
-		ChainName:       "Polygon",
-		NativeSymbol:    "POL",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "BALANCER",
+		chainId:         137,
+		chainName:       "Polygon",
+		nativeSymbol:    "POL",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("balancer", "137")
 			return url
 		}(),
 	},
 	8453: {
-		DexId:           "BALANCER",
-		ChainId:         8453,
-		ChainName:       "Base",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "BALANCER",
+		chainId:         8453,
+		chainName:       "Base",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("balancer", "8453")
 			return url
 		}(),
 	},
 	42161: {
-		DexId:           "BALANCER",
-		ChainId:         42161,
-		ChainName:       "Arbitrum",
-		NativeSymbol:    "ETH",
-		NativePrecision: 18,
-		GraphqlUrl: func() string {
+		dexId:           "BALANCER",
+		chainId:         42161,
+		chainName:       "Arbitrum",
+		nativeSymbol:    "ETH",
+		nativePrecision: 18,
+		graphqlUrl: func() string {
 			url, _ := getGraphqlUrl("balancer", "42161")
 			return url
 		}(),
@@ -841,28 +841,28 @@ var BalancerConfigurations = map[int]*DexConfiguration{
 }
 
 var DexConfigurations = map[string]map[int]*DexConfiguration{
-	"uniswap":      UniswapConfigurations,
-	"pancakeswap":  PancakeswapConfigurations,
-	"sushiswap":    SushiswapConfigurations,
-	"camelot":      CamelotConfigurations,
-	"dodo":         DodoConfigurations,
-	"curve":        CurveConfigurations,
-	"ramsesCl":     RamsesClConfiguration,
-	"ramsesLegacy": RamsesLegacyConfiguration,
-	"swapr":        SwaprConfiguration,
-	"woofi":        WoofiConfigurations,
-	"fluid":        FluidConfigurations,
-	"balancer":     BalancerConfigurations,
-	"maverick":     MaverickConfigurations,
-	"traderjoe":    TraderJoeConfigurations,
-	"raydium":      RaydiumConfigurations,
-	"orca":         OrcaConfigurations,
-	"meteora":      MeteoraConfigurations,
-	"lifinity":     LifintyConfigurations,
-	"minswap":      MinswapConfigurations,
-	"hyperion":     HyperionConfigurations,
-	"thala":        ThalaConfigurations,
-	"cellana":      CellanaConfigurations,
+	"uniswap":      uniswapConfigurations,
+	"pancakeswap":  pancakeswapConfigurations,
+	"sushiswap":    sushiswapConfigurations,
+	"camelot":      camelotConfigurations,
+	"dodo":         dodoConfigurations,
+	"curve":        curveConfigurations,
+	"ramsesCl":     ramsesClConfiguration,
+	"ramsesLegacy": ramsesLegacyConfiguration,
+	"swapr":        swaprConfiguration,
+	"woofi":        woofiConfigurations,
+	"fluid":        fluidConfigurations,
+	"balancer":     balancerConfigurations,
+	"maverick":     maverickConfigurations,
+	"traderjoe":    traderJoeConfigurations,
+	"raydium":      raydiumConfigurations,
+	"orca":         orcaConfigurations,
+	"meteora":      meteoraConfigurations,
+	"lifinity":     lifinityConfigurations,
+	"minswap":      minswapConfigurations,
+	"hyperion":     hyperionConfigurations,
+	"thala":        thalaConfigurations,
+	"cellana":      cellanaConfigurations,
 }
 
 var ChainConfigurations = make(map[int]map[string]*DexConfiguration)
