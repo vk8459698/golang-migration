@@ -1,9 +1,12 @@
-FROM golang:1.21-alpine
+FROM golang:1.24-alpine
 
 WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
 COPY . .
 
-RUN go mod init fetcher-go && go mod tidy
-RUN go build -o target src/main.go
+RUN go build -o target ./src/main.go
 
 CMD ["./target"]
