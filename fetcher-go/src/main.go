@@ -1,27 +1,26 @@
 package main
 
 import (
-	"context"
+	"fetcher-go/src/common"
 	"fmt"
-	"github.com/redis/go-redis/v9"
 	"time"
 )
 
-var ctx = context.Background()
+func initApp() {
+	common.InitRedis()
+}
 
 func main() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr: "redis:6379",
-	})
+	initApp()
 
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {
 		data := fetchLiquidityPools()
-		err := rdb.Set(ctx, "pools", data, 0).Err()
+		err := common.RedisClient.Set(common.Ctx, "pools", data, 0).Err()
 		if err != nil {
-			fmt.Println("Redis error:", err)
+			fmt.Println("[Main] Redis error:", err)
 		} else {
-			fmt.Println("Updated pools in Redis.")
+			fmt.Println("[Main] Updated pools in Redis.")
 		}
 	}
 }
