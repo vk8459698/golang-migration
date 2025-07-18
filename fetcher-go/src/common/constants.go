@@ -852,17 +852,21 @@ var DexConfigurations = map[string]map[int]*DexConfiguration{
 	"swapr":        swaprConfiguration,
 	"woofi":        woofiConfigurations,
 	"fluid":        fluidConfigurations,
-	"balancer":     balancerConfigurations,
-	"maverick":     maverickConfigurations,
-	"traderjoe":    traderJoeConfigurations,
-	"raydium":      raydiumConfigurations,
-	"orca":         orcaConfigurations,
-	"meteora":      meteoraConfigurations,
-	"lifinity":     lifinityConfigurations,
-	"minswap":      minswapConfigurations,
-	"hyperion":     hyperionConfigurations,
-	"thala":        thalaConfigurations,
-	"cellana":      cellanaConfigurations,
+
+	// "balancer":  balancerConfigurations,
+	// "maverick":  maverickConfigurations,
+	// "traderjoe": traderJoeConfigurations,
+	// "orca":      orcaConfigurations,
+
+	"raydium":  raydiumConfigurations,
+	"meteora":  meteoraConfigurations,
+	"lifinity": lifinityConfigurations,
+
+	// "minswap": minswapConfigurations,
+
+	"thala":    thalaConfigurations,
+	"cellana":  cellanaConfigurations,
+	"hyperion": hyperionConfigurations,
 }
 
 var ChainConfigurations = make(map[int]map[string]*DexConfiguration)
