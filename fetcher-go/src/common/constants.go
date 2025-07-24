@@ -841,32 +841,32 @@ var balancerConfigurations = map[int]*DexConfiguration{
 }
 
 var DexConfigurations = map[string]map[int]*DexConfiguration{
-	"uniswap":      uniswapConfigurations,
-	"pancakeswap":  pancakeswapConfigurations,
-	"sushiswap":    sushiswapConfigurations,
-	"camelot":      camelotConfigurations,
-	"dodo":         dodoConfigurations,
-	"curve":        curveConfigurations,
-	"ramsesCl":     ramsesClConfiguration,
-	"ramsesLegacy": ramsesLegacyConfiguration,
+	// "uniswap":      uniswapConfigurations,
+	// "pancakeswap":  pancakeswapConfigurations,
+	// "sushiswap":    sushiswapConfigurations,
+	// "camelot":      camelotConfigurations,
+	// "dodo":         dodoConfigurations,
+	// "curve":        curveConfigurations,
+	// "ramsesCl":     ramsesClConfiguration,
+	// "ramsesLegacy": ramsesLegacyConfiguration,
 	"swapr":        swaprConfiguration,
-	"woofi":        woofiConfigurations,
-	"fluid":        fluidConfigurations,
+	// "woofi":        woofiConfigurations,
+	// "fluid":        fluidConfigurations,
 
 	// "balancer":  balancerConfigurations,
 	// "maverick":  maverickConfigurations,
 	// "traderjoe": traderJoeConfigurations,
 	// "orca":      orcaConfigurations,
 
-	"raydium":  raydiumConfigurations,
-	"meteora":  meteoraConfigurations,
-	"lifinity": lifinityConfigurations,
+	// "raydium":  raydiumConfigurations,
+	// "meteora":  meteoraConfigurations,
+	// "lifinity": lifinityConfigurations,
 
 	// "minswap": minswapConfigurations,
 
-	"thala":    thalaConfigurations,
-	"cellana":  cellanaConfigurations,
-	"hyperion": hyperionConfigurations,
+	// "thala":    thalaConfigurations,
+	// "cellana":  cellanaConfigurations,
+	// "hyperion": hyperionConfigurations,
 }
 
 var ChainConfigurations = make(map[int]map[string]*DexConfiguration)
