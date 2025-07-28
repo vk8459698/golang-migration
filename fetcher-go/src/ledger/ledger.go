@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"fetcher-go/src/common"
 	"fetcher-go/src/dex/camelot"
+	"fetcher-go/src/dex/maverick"
 	"fetcher-go/src/dex/ramses"
 	"fetcher-go/src/dex/ramseslegacy"
 	"fetcher-go/src/dex/swaprv2"
+	"fetcher-go/src/dex/traderjoe"
 	"fetcher-go/src/dex/uniswap"
 	"fmt"
 	"strconv"
@@ -456,6 +458,160 @@ func (l *Ledger) updatePoolData() error {
 							reserve1 := "0"
 							if reserve1Val, exists := poolMap["reserve1"]; exists {
 								reserve1, _ = reserve1Val.(string)
+							}
+
+							tokens := common.SortTokens(token0, token1)
+							tokenPairKey := fmt.Sprintf("%s:%s", tokens[0], tokens[1])
+
+							info := map[string]any{
+								"poolId":    id,
+								"dexId":     dexId,
+								"token0":    token0,
+								"token1":    token1,
+								"symbol0":   symbol0,
+								"symbol1":   symbol1,
+								"decimals0": decimals0,
+								"decimals1": decimals1,
+								"reserve0":  reserve0,
+								"reserve1":  reserve1,
+								"fee":       0,
+								"gasPrice":  "0",
+							}
+
+							jsonInfo, _ := json.Marshal(info)
+							redisClient.HSet(ctx, fmt.Sprintf("poolData:%s:%s", chainIdStr, tokenPairKey), id, jsonInfo)
+							redisClient.HSet(ctx, fmt.Sprintf("tokenSymbol:%s", chainIdStr), token0, symbol0)
+							redisClient.HSet(ctx, fmt.Sprintf("tokenSymbol:%s", chainIdStr), token1, symbol1)
+
+							mu.Lock()
+							if _, exists := chainGraph[token0]; !exists {
+								chainGraph[token0] = make(map[string]bool)
+							}
+							if _, exists := chainGraph[token1]; !exists {
+								chainGraph[token1] = make(map[string]bool)
+							}
+							chainGraph[token0][token1] = true
+							chainGraph[token1][token0] = true
+							mu.Unlock()
+						}
+
+					case "MAVERICK_V2":
+						pools, err := maverick.FetchPools(chainId, dexName, dexConfig)
+						if err != nil {
+							fmt.Printf("[Ledger] Error fetching pools for %s: %v\n", dexName, err)
+							return
+						}
+
+						for _, p := range pools {
+							poolMap, ok := p.(*maverick.PoolDetails)
+							if !ok {
+								continue
+							}
+
+							id := common.Checksum(poolMap.ID)
+							if id == "0xe79d4ef25f12384f5a541d1e3485df69dd81447f" || id == "0xee9bf1d1e23784067bd7b0b3496f865038b766eb" {
+								continue
+							}
+
+							token0 := common.Checksum(poolMap.TokenA)
+							token1 := common.Checksum(poolMap.TokenB)
+							// symbol0 := "UNKNOWN" // Commented out as in the original JS
+							// symbol1 := "UNKNOWN" // Commented out as in the original JS
+							reserve0 := poolMap.State.ReserveA
+							reserve1 := poolMap.State.ReserveB
+							feeAIn := poolMap.FeeAIn
+							feeBIn := poolMap.FeeBIn
+							protocolFeeA := poolMap.ProtocolFeeA
+							protocolFeeB := poolMap.ProtocolFeeB
+							sqrtPrice := poolMap.SqrtPrice
+							liquidity := poolMap.Liquidity
+							sqrtLowerPrice := poolMap.SqrtLowerPrice
+							sqrtUpperPrice := poolMap.SqrtUpperPrice
+
+							tokens := common.SortTokens(token0, token1)
+							tokenPairKey := fmt.Sprintf("%s:%s", tokens[0], tokens[1])
+
+							info := map[string]any{
+								"poolId":         id,
+								"dexId":          dexId,
+								"token0":         token0,
+								"token1":         token1,
+								"feeAIn":         feeAIn,
+								"feeBIn":         feeBIn,
+								"reserve0":       reserve0,
+								"reserve1":       reserve1,
+								"protocolFeeA":   protocolFeeA,
+								"protocolFeeB":   protocolFeeB,
+								"sqrtPrice":      sqrtPrice,
+								"liquidity":      liquidity,
+								"sqrtLowerPrice": sqrtLowerPrice,
+								"sqrtUpperPrice": sqrtUpperPrice,
+								"gasPrice":       "0",
+							}
+
+							jsonInfo, _ := json.Marshal(info)
+							redisClient.HSet(ctx, fmt.Sprintf("poolData:%s:%s", chainIdStr, tokenPairKey), id, jsonInfo)
+							// redisClient.HSet(ctx, fmt.Sprintf("tokenSymbol:%s", chainIdStr), token0, symbol0) // Commented out as in the original JS
+							// redisClient.HSet(ctx, fmt.Sprintf("tokenSymbol:%s", chainIdStr), token1, symbol1) // Commented out as in the original JS
+
+							mu.Lock()
+							if _, exists := chainGraph[token0]; !exists {
+								chainGraph[token0] = make(map[string]bool)
+							}
+							if _, exists := chainGraph[token1]; !exists {
+								chainGraph[token1] = make(map[string]bool)
+							}
+							chainGraph[token0][token1] = true
+							chainGraph[token1][token0] = true
+							mu.Unlock()
+						}
+
+					case "TRADERJOE":
+						pools, err := traderjoe.FetchPools(chainId, dexName, dexConfig)
+						if err != nil {
+							fmt.Printf("[Ledger] Error fetching pools for %s: %v\n", dexName, err)
+							return
+						}
+
+						for _, p := range pools {
+							poolMap, ok := p.(map[string]any)
+							if !ok {
+								continue
+							}
+
+							id := common.Checksum(poolMap["id"].(string))
+							if id == "0xe79d4ef25f12384f5a541d1e3485df69dd81447f" || id == "0xee9bf1d1e23784067bd7b0b3496f865038b766eb" {
+								continue
+							}
+
+							token0 := common.Checksum(poolMap["token0"].(map[string]any)["id"].(string))
+							token1 := common.Checksum(poolMap["token1"].(map[string]any)["id"].(string))
+							symbol0 := poolMap["token0"].(map[string]any)["symbol"]
+							symbol1 := poolMap["token1"].(map[string]any)["symbol"]
+
+							decimals0, err := strconv.Atoi(poolMap["token0"].(map[string]any)["decimals"].(string))
+							if err != nil {
+								continue
+							}
+
+							decimals1, err := strconv.Atoi(poolMap["token1"].(map[string]any)["decimals"].(string))
+							if err != nil {
+								continue
+							}
+
+							reserve0 := "0"
+							if reserve0Val, exists := poolMap["reserve0"]; exists {
+								reserve0, _ = reserve0Val.(string)
+							}
+
+							reserve1 := "0"
+							if reserve1Val, exists := poolMap["reserve1"]; exists {
+								reserve1, _ = reserve1Val.(string)
+							}
+
+							// Skip pools with zero reserves (as done in the JavaScript version)
+							if reserve0 == "0" || reserve1 == "0" {
+								continue
 							}
 
 							tokens := common.SortTokens(token0, token1)
